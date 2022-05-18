@@ -34,7 +34,7 @@ class EphemeralRandomConstant(ConstantTerminal):
 
 
 class IndependentVariable(FunctionTerminal):
-    def __len__(self, variable):
+    def __init__(self, variable):
         self.variable = variable
 
     def get_value(self):

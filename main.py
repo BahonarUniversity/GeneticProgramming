@@ -5,13 +5,15 @@
 
 
 # Press the green button in the gutter to run the script.
-from Functions import AdditionFunction, SubtractionFunction, MultiplicationFunction, ProtectedDivisionFunction
-from Terminals import IndependentVariable, EphemeralRandomConstant
+from FunctionGenerator import AdditionFunctionGenerator, SubtractionFunctionGenerator, MultiplicationFunctionGenerator, \
+    ProtectedDivisionFunctionGenerator
+from TerminalGenerator import EphemeralRandomConstantGenerator, IndependentVariableGenerator
 from TreeGenerator import RampedHalfAndHalfGenerator
 
 if __name__ == '__main__':
-    functions = [AdditionFunction(), SubtractionFunction(), MultiplicationFunction(), ProtectedDivisionFunction()]
-    terminals = [EphemeralRandomConstant(), IndependentVariable()]
+    functions = [AdditionFunctionGenerator(), SubtractionFunctionGenerator(), MultiplicationFunctionGenerator(),
+                 ProtectedDivisionFunctionGenerator()]
+    terminals = [EphemeralRandomConstantGenerator(), IndependentVariableGenerator()]
     tg = RampedHalfAndHalfGenerator(terminals, functions, 2)
     tree = tg.generate_tree()
     print(tree)

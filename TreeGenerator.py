@@ -3,11 +3,12 @@ import random
 from abc import ABC, abstractmethod
 from typing import List
 
+from Generator import TerminalGenerator, FunctionGenerator
 from TreeUtilities import TerminalNode, FunctionNode, TreeNode
 
 
 class TreeGenerator(ABC):
-    def __init__(self, terminal_set: List[TerminalNode], function_set: List[FunctionNode]):
+    def __init__(self, terminal_set: List[TerminalGenerator], function_set: List[FunctionGenerator]):
         self.terminal_set = terminal_set
         self.function_set = function_set
         self._function_count = len(function_set)
@@ -20,12 +21,12 @@ class TreeGenerator(ABC):
     def _add_terminal_node(self):
         random_terminal_index = random.Random().randint(0, self._terminal_count - 1)
         random_terminal = self.terminal_set[random_terminal_index]
-        return copy.deepcopy(random_terminal)
+        return random_terminal.generate()
 
     def _add_function_node(self):
         random_function_index = random.Random().randint(0, self._function_count - 1)
         random_function = self.function_set[random_function_index]
-        return copy.deepcopy(random_function)
+        return random_function.generate()
 
 
 class FullTreeGenerator(TreeGenerator):
@@ -41,7 +42,7 @@ class FullTreeGenerator(TreeGenerator):
             new_node = self._add_terminal_node()
         else:
             new_node = self._add_function_node()
-            sub_nodes: List[TreeNode] = [None]
+            sub_nodes: List[TreeNode] = []
             for i in range(new_node.sub_nodes_count):
                 sub_nodes.append(self.__generate_node(depth + 1))
             new_node.add_sub_nodes(sub_nodes)
@@ -62,7 +63,7 @@ class GrowTreeGenerator(TreeGenerator):
         else:
             if random.Random().random() > 0.5:
                 new_node = self._add_function_node()
-                sub_nodes: List[TreeNode] = [None]
+                sub_nodes: List[TreeNode] = []
                 for i in range(new_node.sub_nodes_count):
                     sub_nodes.append(self.__generate_node(depth + 1))
                 new_node.add_sub_nodes(sub_nodes)
@@ -76,12 +77,12 @@ class RampedHalfAndHalfGenerator(TreeGenerator):
     def __init__(self, terminal_set: List[TerminalNode], function_set: List[FunctionNode], max_depth: int):
         super().__init__(terminal_set, function_set)
         self.max_depth = max_depth
-        self.__grow_generator = GrowTreeGenerator(terminal_set, function_set, max_depth-1)
-        self.__full_generator = FullTreeGenerator(terminal_set, function_set, max_depth-1)
+        self.__grow_generator: GrowTreeGenerator = GrowTreeGenerator(terminal_set, function_set, max_depth-1)
+        self.__full_generator: FullTreeGenerator = FullTreeGenerator(terminal_set, function_set, max_depth-1)
 
     def generate_tree(self) -> TreeNode:
         new_node = self._add_function_node()
-        sub_nodes: List[TreeNode] = [None]
+        sub_nodes: List[TreeNode] = []
         for i in range(new_node.sub_nodes_count):
             if i % 2 == 0:
                 sub_nodes.append(self.__full_generator.generate_tree())
