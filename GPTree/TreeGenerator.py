@@ -30,7 +30,7 @@ class TreeGenerator(ABC):
 
 
 class FullTreeGenerator(TreeGenerator):
-    def __init__(self, terminal_set: List[TerminalNode], function_set: List[FunctionNode], max_depth: int):
+    def __init__(self, terminal_set: List[TerminalGenerator], function_set: List[FunctionGenerator], max_depth: int):
         super().__init__(terminal_set, function_set)
         self.max_depth = max_depth
 
@@ -50,7 +50,7 @@ class FullTreeGenerator(TreeGenerator):
 
 
 class GrowTreeGenerator(TreeGenerator):
-    def __init__(self, terminal_set: List[TerminalNode], function_set: List[FunctionNode], max_depth: int):
+    def __init__(self, terminal_set: List[TerminalGenerator], function_set: List[FunctionGenerator], max_depth: int):
         super().__init__(terminal_set, function_set)
         self.max_depth = max_depth
 
@@ -74,7 +74,7 @@ class GrowTreeGenerator(TreeGenerator):
 
 class RampedHalfAndHalfGenerator(TreeGenerator):
 
-    def __init__(self, terminal_set: List[TerminalNode], function_set: List[FunctionNode], max_depth: int):
+    def __init__(self, terminal_set: List[TerminalGenerator], function_set: List[FunctionGenerator], max_depth: int):
         super().__init__(terminal_set, function_set)
         self.max_depth = max_depth
         self.__grow_generator: GrowTreeGenerator = GrowTreeGenerator(terminal_set, function_set, max_depth-1)

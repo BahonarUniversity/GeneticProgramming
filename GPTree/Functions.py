@@ -33,20 +33,21 @@ class TernaryTreeNode(FunctionNode, ABC):
 
 
 class AdditionFunction(BinaryTreeNode):
-    def get_value(self):
-        return self.sub_node_1.get_value() + self.sub_node_2.get_value()
+    def get_composition(self):
+        return f'({self.sub_nodes[0].get_composition()} + {self.sub_nodes[1].get_composition()})'
 
 
 class SubtractionFunction(BinaryTreeNode):
-    def get_value(self):
-        return self.sub_node_1.get_value() - self.sub_node_2.get_value()
+    def get_composition(self):
+        return f'({self.sub_nodes[0].get_composition()} - {self.sub_nodes[1].get_composition()})'
 
 
 class MultiplicationFunction(BinaryTreeNode):
-    def get_value(self):
-        return self.sub_node_1.get_value() * self.sub_node_2.get_value()
+    def get_composition(self):
+        return f'({self.sub_nodes[0].get_composition()} * {self.sub_nodes[1].get_composition()})'
 
 
 class ProtectedDivisionFunction(BinaryTreeNode):
-    def get_value(self):
-        return self.sub_node_1.get_value() / self.sub_node_2.get_value() if self.sub_node_2 != 0 else 0
+    def get_composition(self):
+        return f'({self.sub_nodes[0].get_composition()} / {self.sub_nodes[1].get_composition()})' if self.sub_nodes[1] != 0 \
+            else '%.4f' % 1

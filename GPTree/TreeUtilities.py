@@ -4,7 +4,7 @@ from typing import List
 
 class TreeNode(ABC):
     @abstractmethod
-    def get_value(self):
+    def get_composition(self):
         pass
 
 

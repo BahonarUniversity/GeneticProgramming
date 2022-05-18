@@ -26,17 +26,17 @@ class EphemeralRandomConstant(ConstantTerminal):
         self.max_value = max_value
         self._constant_number = random.Random().uniform(min_value, max_value)
 
-    def get_value(self):
-        return self._constant_number
+    def get_composition(self):
+        return '%.4f' % self._constant_number
 
     def update(self):
         self._constant_number = random.Random().uniform(self.min_value, self.max_value)
 
 
-class IndependentVariable(FunctionTerminal):
-    def __init__(self, variable):
+class InputVariable(FunctionTerminal):
+    def __init__(self, variable: str):
         self.variable = variable
 
-    def get_value(self):
-        pass
+    def get_composition(self):
+        return self.variable
 
