@@ -1,7 +1,8 @@
-from abc import ABC, abstractmethod
+import random
+from abc import ABC
 
 from Functions import TreeNode
-from TreeUtilities import TerminalNode, Arguments
+from TreeUtilities import TerminalNode
 
 
 class InputTerminal(TerminalNode, ABC):
@@ -19,8 +20,23 @@ class ConstantTerminal(TerminalNode, ABC):
 #########################################
 
 class EphemeralRandomConstant(ConstantTerminal):
-    def __init__(self):
+    def __init__(self, min_value: float = 0, max_value: float = 1):
+        print('ephemeral random constant')
+        self.min_value = min_value
+        self.max_value = max_value
+        self._constant_number = random.Random().uniform(min_value, max_value)
+
+    def get_value(self):
+        return self._constant_number
+
+    def update(self):
+        self._constant_number = random.Random().uniform(self.min_value, self.max_value)
 
 
-    def get_value(self, arguments: Arguments):
+class IndependentVariable(FunctionTerminal):
+    def __len__(self, variable):
+        self.variable = variable
+
+    def get_value(self):
         pass
+

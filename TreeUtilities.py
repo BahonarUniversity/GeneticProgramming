@@ -1,24 +1,10 @@
 from abc import ABC, abstractmethod
-
-
-class Arguments(ABC):
-    pass
-
-
-class TwoArguments(Arguments):
-    Argument1 = 0.0
-    Argument2 = 0.0
-
-
-class ThreeArguments(Arguments):
-    Argument1 = 0.0
-    Argument2 = 0.0
-    Argument3 = 0.0
+from typing import List
 
 
 class TreeNode(ABC):
     @abstractmethod
-    def get_value(self, arguments: Arguments):
+    def get_value(self):
         pass
 
 
@@ -26,14 +12,15 @@ class TerminalNode(TreeNode, ABC):
     pass
 
 
-class BinaryTreeNode(TreeNode, ABC):
-    sub_node_1: TreeNode = None
-    sub_node_2: TreeNode = None
+class FunctionNode(TreeNode, ABC):
 
+    def __init__(self):
+        self.sub_nodes_count: int = 0
+        self.sub_nodes: List[TreeNode] = []
 
-class TernaryTreeNode(TreeNode, ABC):
-    sub_node_1: TreeNode = None
-    sub_node_2: TreeNode = None
-    sub_node_3: TreeNode = None
+    @abstractmethod
+    def add_sub_nodes(self, sub_nodes: List[TreeNode]):
+        pass
+
 
 
