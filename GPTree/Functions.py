@@ -1,7 +1,7 @@
 from abc import ABC
 from typing import List
 
-from TreeUtilities import TreeNode, FunctionNode
+from GPTree.TreeUtilities import TreeNode, FunctionNode
 
 
 class BinaryTreeNode(FunctionNode, ABC):
@@ -49,5 +49,6 @@ class MultiplicationFunction(BinaryTreeNode):
 
 class ProtectedDivisionFunction(BinaryTreeNode):
     def get_composition(self):
-        return f'({self.sub_nodes[0].get_composition()} / {self.sub_nodes[1].get_composition()})' if self.sub_nodes[1] != 0 \
+        return f'({self.sub_nodes[0].get_composition()} / {self.sub_nodes[1].get_composition()})'\
+            if self.sub_nodes[1] != 0 \
             else '%.4f' % 1

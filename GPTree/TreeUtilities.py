@@ -3,13 +3,25 @@ from typing import List
 
 
 class TreeNode(ABC):
+    __nodes: [] = None
     @abstractmethod
     def get_composition(self):
         pass
 
+    @abstractmethod
+    def __take_all_nodes(self):
+        pass
+
+    def select_random_node(self):
+        if self.__nodes is None:
+            self.__nodes = self.__take_all_nodes()
+
 
 class TerminalNode(TreeNode, ABC):
-    pass
+
+    def __take_all_nodes(self):
+        self.__nodes = []
+        self.__nodes.append(self)
 
 
 class FunctionNode(TreeNode, ABC):
@@ -21,6 +33,11 @@ class FunctionNode(TreeNode, ABC):
     @abstractmethod
     def add_sub_nodes(self, sub_nodes: List[TreeNode]):
         pass
+
+    def __take_all_nodes(self):
+        self.__nodes = []
+        self.__nodes.append(self)
+        # take subnodes
 
 
 

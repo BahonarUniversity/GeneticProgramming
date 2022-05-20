@@ -5,22 +5,21 @@
 
 from GPTree.FunctionGenerator import AdditionFunctionGenerator, SubtractionFunctionGenerator, MultiplicationFunctionGenerator, \
     ProtectedDivisionFunctionGenerator
+from ProblemFunction import SimplePolynomialFromBook
 from SimpleGeneticProgramming import SimpleGeneticProgramming
 from GPTree.TerminalGenerator import EphemeralRandomConstantGenerator, InputVariableGenerator
-
-# Press the green button in the gutter to run the script.
 
 
 def run_genetic_programming():
     functions = [AdditionFunctionGenerator(), SubtractionFunctionGenerator(), MultiplicationFunctionGenerator(),
                  ProtectedDivisionFunctionGenerator()]
-    terminals = [EphemeralRandomConstantGenerator(), InputVariableGenerator('x')]
+    terminals = [EphemeralRandomConstantGenerator(), InputVariableGenerator('X[0]')]
     sgp = SimpleGeneticProgramming(n_population=4, trees_depth=2, function_set=functions, terminal_set=functions)
-    sgp.train()
-    composition = tree.get_composition()
+    sf = SimplePolynomialFromBook()
+    input_data, output_data = sf.generate_data([(-5, 5)], 0.1)
+    sgp.train(input_data, output_data)
 
 
 if __name__ == '__main__':
     run_genetic_programming()
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/

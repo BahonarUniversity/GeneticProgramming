@@ -1,5 +1,5 @@
-from Generator import TerminalGenerator
-from Terminals import EphemeralRandomConstant, InputVariable
+from GPTree.Generator import TerminalGenerator
+from GPTree.Terminals import EphemeralRandomConstant, InputVariable
 
 
 class EphemeralRandomConstantGenerator(TerminalGenerator):

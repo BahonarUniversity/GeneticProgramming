@@ -1,8 +1,8 @@
 import random
 from abc import ABC
 
-from Functions import TreeNode
-from TreeUtilities import TerminalNode
+from GPTree.Functions import TreeNode
+from GPTree.TreeUtilities import TerminalNode
 
 
 class InputTerminal(TerminalNode, ABC):

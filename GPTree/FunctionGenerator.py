@@ -1,8 +1,8 @@
 from abc import ABC, abstractmethod
 
-from Functions import AdditionFunction, ProtectedDivisionFunction, MultiplicationFunction, SubtractionFunction
-from Generator import FunctionGenerator
-from TreeUtilities import FunctionNode
+from GPTree.Functions import AdditionFunction, ProtectedDivisionFunction, MultiplicationFunction, SubtractionFunction
+from GPTree.Generator import FunctionGenerator
+from GPTree.TreeUtilities import FunctionNode
 
 
 class AdditionFunctionGenerator(FunctionGenerator):

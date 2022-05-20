@@ -3,8 +3,8 @@ import random
 from abc import ABC, abstractmethod
 from typing import List
 
-from Generator import TerminalGenerator, FunctionGenerator
-from TreeUtilities import TerminalNode, FunctionNode, TreeNode
+from GPTree.Generator import TerminalGenerator, FunctionGenerator
+from GPTree.TreeUtilities import TerminalNode, FunctionNode, TreeNode
 
 
 class TreeGenerator(ABC):

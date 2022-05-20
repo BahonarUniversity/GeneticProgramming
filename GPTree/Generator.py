@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from TreeUtilities import FunctionNode, TerminalNode
+from GPTree.TreeUtilities import FunctionNode, TerminalNode
 
 
 class Generator(ABC):
