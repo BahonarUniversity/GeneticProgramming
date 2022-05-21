@@ -49,6 +49,8 @@ class MultiplicationFunction(BinaryTreeNode):
 
 class ProtectedDivisionFunction(BinaryTreeNode):
     def get_composition(self):
-        return f'({self.sub_nodes[0].get_composition()} / {self.sub_nodes[1].get_composition()})'\
-            if self.sub_nodes[1] != 0 \
-            else '%.4f' % 1
+        node_0 = self.sub_nodes[0].get_composition()
+        node_1 = self.sub_nodes[1].get_composition()
+        return f'({node_0} / {node_1} if {node_1} != 0 else 1 )' # \
+            # if self.sub_nodes[1] != 0 \
+            # else '%.4f' % 1

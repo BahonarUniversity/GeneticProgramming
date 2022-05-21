@@ -21,7 +21,6 @@ class ConstantTerminal(TerminalNode, ABC):
 
 class EphemeralRandomConstant(ConstantTerminal):
     def __init__(self, min_value: float = 0, max_value: float = 1):
-        print('ephemeral random constant')
         self.min_value = min_value
         self.max_value = max_value
         self._constant_number = random.Random().uniform(min_value, max_value)

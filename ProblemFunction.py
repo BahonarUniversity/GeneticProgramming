@@ -45,9 +45,6 @@ class ProblemFunction(ABC):
         return arr.reshape(la, -1).T
 
 
-
-
-
 class SimplePolynomialFromBook(ProblemFunction):
 
     def execute(self, x: []):

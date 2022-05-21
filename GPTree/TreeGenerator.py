@@ -44,7 +44,9 @@ class FullTreeGenerator(TreeGenerator):
             new_node = self._add_function_node()
             sub_nodes: List[TreeNode] = []
             for i in range(new_node.sub_nodes_count):
-                sub_nodes.append(self.__generate_node(depth + 1))
+                sub_node = self.__generate_node(depth + 1)
+                sub_node.parent = new_node
+                sub_nodes.append(sub_node)
             new_node.add_sub_nodes(sub_nodes)
         return new_node
 
@@ -65,7 +67,9 @@ class GrowTreeGenerator(TreeGenerator):
                 new_node = self._add_function_node()
                 sub_nodes: List[TreeNode] = []
                 for i in range(new_node.sub_nodes_count):
-                    sub_nodes.append(self.__generate_node(depth + 1))
+                    sub_node = self.__generate_node(depth + 1)
+                    sub_node.parent = new_node
+                    sub_nodes.append(sub_node)
                 new_node.add_sub_nodes(sub_nodes)
             else:
                 new_node = self._add_terminal_node()
@@ -85,9 +89,11 @@ class RampedHalfAndHalfGenerator(TreeGenerator):
         sub_nodes: List[TreeNode] = []
         for i in range(new_node.sub_nodes_count):
             if i % 2 == 0:
-                sub_nodes.append(self.__full_generator.generate_tree())
+                sub_node = self.__full_generator.generate_tree()
             else:
-                sub_nodes.append(self.__grow_generator.generate_tree())
+                sub_node = self.__grow_generator.generate_tree()
+            sub_node.parent = new_node
+            sub_nodes.append(sub_node)
         new_node.add_sub_nodes(sub_nodes)
         return new_node
 
